@@ -1,10 +1,10 @@
 import express from 'express';
-import { Book } from '../models/bookModel.js';
+import { Book } from '../models/booksModel.js';
 
 const router = express.Router();
 
 //route to save new book
-router.post('/books', async(req, res) => {
+router.post('/', async(req, res) => {
     // Logic to add a new book will go here
     try {
         if(!req.body.title || !req.body.author || !req.body.publishYear) {
@@ -28,7 +28,7 @@ router.post('/books', async(req, res) => {
 });
 
 //route for get all books 
-router.get('/books', async (req, res)=>{
+router.get('/', async (req, res)=>{
     try{
         const books = await Book.find({});
         return res.status(200).json({
@@ -100,3 +100,5 @@ router.delete('/:id', async (request, response) => {
     response.status(500).send({ message: error.message });
   }
 });
+
+export default router;
